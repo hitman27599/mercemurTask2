@@ -1,0 +1,91 @@
+GET http://localhost:8000/api/products
+
+###
+GET http://localhost:8000/api/products/621c77871cb469762ecb926a
+
+###
+### get by brand
+GET http://localhost:8000/api/products/brand/adidas
+
+###
+POST http://localhost:8000/api/products
+content-type:application/json
+
+{
+    "productName":"hoodie1",
+    "productShortDesc":"avengers hoodie1",
+    "images":"images1",
+    "slug" : "",
+    "featured" : "",
+    "cateogary" : [""],
+    "productContent" : "",
+    "metaName" : "",
+    "metaKeyword" : "",
+    "metaDescription" : "",
+    "stock":[
+        {
+            "quantity":50,
+            "price":1000
+        },
+        {
+            "quantity":100,
+            "price":2000
+        }
+    ],
+    "attributeDetails" :[{
+        "attributeName" : "size1",
+        "atrributes" : ["small1","large1"]
+    }],
+    "discountType":"percentage1"
+}
+
+###
+productDetails:{
+    productName:Pant,
+    productShortDesc:classy jeans,
+    images:images
+},
+
+stock:{
+    qty:15,
+    stockStatus:available,
+    price:20
+},
+
+discount:{
+    discounttype:none,
+}
+
+###
+productDetails:{
+    productName:<String>,
+    productShortDesc:<String>,
+    images:[<String>]
+},
+advanceSettings:{
+    slug:<String>,
+    brand:<BrandId>,
+    featured:<String>,
+    cateogary:String,
+    productContent:<String>
+},
+seo:{
+    metaName:<String>,
+    metaKeyword:<String>,
+    metaDescription:<String>
+},
+stock:{
+    SKU:<String>,
+    attribute:[<String>],
+    qty:<Number>,
+    stockStatus:<String>,
+    price:Number
+},
+attributeDetails:{
+    attributes:[{<attribute}]
+},
+discount:{
+    discounttype:<String>,
+    discountStartDate:<Date>,
+    discountEndDate:<Date>
+}
