@@ -16,6 +16,7 @@ content-type:application/json
     "productShortDesc":"avengers hoodie1",
     "images":"images1",
     "slug" : "",
+    "brand" : "62206e433e306f93d16588f8",
     "featured" : "",
     "cateogary" : [""],
     "productContent" : "",
@@ -24,68 +25,38 @@ content-type:application/json
     "metaDescription" : "",
     "stock":[
         {
-            "quantity":50,
-            "price":1000
+            "quantity":5,
+            "attribute":["red","small"],
+            "price":100
         },
         {
-            "quantity":100,
-            "price":2000
+            "quantity":10,
+            "attribute":["red","medium"],
+            "price":200
+        },
+        {
+            "quantity":5,
+            "attribute":["blue","small"],
+            "price":100
+        },
+        {
+            "quantity":10,
+            "attribute":["blue","medium"],
+            "price":200
         }
     ],
-    "attributeDetails" :[{
-        "attributeName" : "size1",
-        "atrributes" : ["small1","large1"]
-    }],
-    "discountType":"percentage1"
+    "attributeDetails" :[
+        {
+            "attributeName" : "colour",
+            "attributes" : ["red","blue"]
+        },
+        {
+            "attributeName" : "size",
+            "attributes" : ["s","m"]
+        }
+    ],
+    "discountType":"percentage"
 }
 
 ###
-productDetails:{
-    productName:Pant,
-    productShortDesc:classy jeans,
-    images:images
-},
 
-stock:{
-    qty:15,
-    stockStatus:available,
-    price:20
-},
-
-discount:{
-    discounttype:none,
-}
-
-###
-productDetails:{
-    productName:<String>,
-    productShortDesc:<String>,
-    images:[<String>]
-},
-advanceSettings:{
-    slug:<String>,
-    brand:<BrandId>,
-    featured:<String>,
-    cateogary:String,
-    productContent:<String>
-},
-seo:{
-    metaName:<String>,
-    metaKeyword:<String>,
-    metaDescription:<String>
-},
-stock:{
-    SKU:<String>,
-    attribute:[<String>],
-    qty:<Number>,
-    stockStatus:<String>,
-    price:Number
-},
-attributeDetails:{
-    attributes:[{<attribute}]
-},
-discount:{
-    discounttype:<String>,
-    discountStartDate:<Date>,
-    discountEndDate:<Date>
-}

@@ -1,0 +1,10 @@
+### create a new breand
+POST http://localhost:8000/api/brands
+content-type:application/json
+
+{
+    "name":"adidas"
+}
+
+### get all brands
+GET http://localhost:8000/api/brands

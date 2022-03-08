@@ -6,19 +6,23 @@ const Product = require('../../model/Product');
 const ProductDetails = require('../../model/ProductDetails');
 const Seo = require('../../model/Seo');
 const Stock = require('../../model/Stock');
+const {ROLES,authenticate} = require('../../auth');
 
 const router = require('express').Router();
+const multer = require("multer");
+const cloudinary = require("cloudinary").v2;
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
 
 // get all products
 router.get('/',async(req,res)=>{
-    const products = await Product.find({});
+    const products = await Product.find({}).populate("stock");
     res.status(200).send(products);
 })
 
 // get single product by id
-router.get('/:id',async(req,res)=>{
+router.get('/product/:id',async(req,res)=>{
     const id = req.params.id;
-    const product =await Product.findById(id);
+    const product =await Product.findById(id).populate("stock");
     res.status(200).send(product);
 })
 
@@ -55,12 +59,31 @@ router.get('/cateogary/:cateogary',async(req,res)=>{
 });
 
 // add product
-router.post('/',async(req,res)=>{
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_SECRET_KEY
+});
 
+const storage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: {
+      folder: "DEV"
+    },
+});
+const upload = multer({ storage: storage });
+router.post('/',upload.array('image'),async(req,res)=>{
+    // console.log(req.body);
+    console.log(req.files);
+    var images=[];
+    for(let img of req.files){
+        images.push(img.path);
+    }
+    console.log(JSON.parse(req.body.stock));
     const productDetails ={
         productName : req.body.productName,
         productShortDesc : req.body.productShortDesc,
-        images : req.body.images
+        images : images
     };
 
     const advanceSettings = {
@@ -77,14 +100,12 @@ router.post('/',async(req,res)=>{
         metaDescription : req.body.metaDescription
     };
 
-    const stock1 = await Stock.insertMany(req.body.stock,forceServerObjectId=true);
+    const stock1 = await Stock.insertMany(JSON.parse(req.body.stock),forceServerObjectId=true);
     var stock=[];
     stock1.forEach((stk)=>{
         stock.push(stk._id);
     });
     
-
-    const attributeDetails = req.body.attributeDetails;
 
     const discount = {
         discountType : req.body.discountType,
@@ -97,26 +118,30 @@ router.post('/',async(req,res)=>{
         advanceSettings:advanceSettings,
         seo:seo,
         stock:stock,
-        attributeDetails:attributeDetails,
         discount:discount
     });
+    if(req.body.attributeDetails === ''){
+        const attributeDetails = req.body.attributeDetails;
+        product[attributeDetails] = attributeDetails;
+    }
     const prod = await product.save();
     res.json(prod);
 
 });
 
 // deleted all items
-router.delete('/',(req,res)=>{
-    const products = Product.deleteMany({});
+router.delete('/',async(req,res)=>{
+    const products = await Product.deleteMany({});
     res.status(200).send("all items deleted");
 })
 
 // deleted by id
-router.delete('/',(req,res)=>{
+router.delete('/',async(req,res)=>{
     const id = req.params.id;
-    const products = Product.findByIdAndDelete(id);
+    const products = await Product.findByIdAndDelete(id);
     res.status(200).send("all items deleted");
-})
+});
+
 
 
 module.exports = router;

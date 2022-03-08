@@ -4,8 +4,8 @@ const StockSchema = new mongoose.Schema({
     SKU:{
         type:String
     },
-    attribute:{
-        type:[String]
+    variant:{
+        type:String
     },
     quantity:{
         type:Number
@@ -16,6 +16,10 @@ const StockSchema = new mongoose.Schema({
     price:{
         type:Number,
         required:true
+    },
+    isActive:{
+        type:Boolean,
+        default:true
     }
 });
 

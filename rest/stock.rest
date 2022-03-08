@@ -1,0 +1,34 @@
+###
+POST http://localhost:8000/api/stocks
+content-type: application/json
+
+{
+    "id":"62206e853e306f93d16588ff",
+    "attributeDetails" :[
+        {
+            "attributeName" : "colour",
+            "attributes" : ["red","blue","purple"]
+        },
+        {
+            "attributeName" : "size",
+            "attributes" : ["s","m","l"]
+        }
+    ],
+    "stock":[
+        {
+            "quantity":5,
+            "attribute":["purple","small"],
+            "price":100
+        },
+        {
+            "quantity":10,
+            "attribute":["purple","large"],
+            "price":200
+        },
+        {
+            "quantity":5,
+            "attribute":["red","large"],
+            "price":100
+        }
+    ]
+}
