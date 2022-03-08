@@ -9,8 +9,8 @@
     "start": "node backend/server.js",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install npm && run build"
   },
-  "engine":{
-    "node":"16.10.0"
+  "engines": {
+    "node": "16.10.0"
   },
   "keywords": [],
   "author": "",
