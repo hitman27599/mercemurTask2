@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const multer = require("multer");
+const path = require("path");
 
 
 const db = require('./db/db');
@@ -11,6 +12,7 @@ const brandRoutes = require('./routes/api/BrandAPI');
 const stockRoutes = require('./routes/api/stockAPI');
 const loginRoutes = require('./routes/api/loginAPI');
 const registerRoutes = require('./routes/api/registerAPI');
+const req = require('express/lib/request');
 
 
 const port = process.env.PORT || 8000;
